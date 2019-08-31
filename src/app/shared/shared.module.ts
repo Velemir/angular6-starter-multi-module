@@ -2,13 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RequiredLabelDirective } from './directives/required-label.directive';
 
+const exportedDeclarations = [
+  RequiredLabelDirective
+];
+
 @NgModule({
     imports: [
         CommonModule
     ],
-    declarations: [RequiredLabelDirective],
+    declarations: [...exportedDeclarations],
     exports: [
-        RequiredLabelDirective
+      ...exportedDeclarations
     ]
 })
 export class SharedModule { }

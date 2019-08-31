@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreRoutingModule } from './core-routing.module';
-import { LoginComponent } from './login/login.component';
-import { HeaderComponent } from './header/header.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { HeaderComponent } from './layout/header/header.component';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import {PublicModule} from '../public/public.module';
 
 @NgModule({
     imports: [
         CommonModule,
+        PublicModule,
         CoreRoutingModule
     ],
-    declarations: [LoginComponent, HeaderComponent, NotFoundComponent],
+    declarations: [HeaderComponent],
     exports: [
         RouterModule,
         HeaderComponent

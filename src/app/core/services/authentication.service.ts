@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
+
     token = {
         refresh_token: 'refreshtokencode',
         exp: new Date((new Date().getDate() + 1)),
@@ -12,20 +13,24 @@ export class AuthenticationService {
         }
     };
 
-    tokenKey: string = "a6smm_utoken"
+    tokenKey = 'a6smm_utoken';
 
     constructor(private router: Router) { }
 
     login(username, password) {
+        console.log('username', username);
+        console.log('password', password);
         this.setToken(this.token);
-        this.router.navigate(['admin', 'dashboard']);
+        return this.router.navigate(['admin', 'dashboard']);
     }
 
     logout() {
         this.removeToken();
-        this.router.navigate(['login']);
+        return this.router.navigate(['login']);
     }
 
+
+    // TODO: change local storage to cookies
     getToken() {
         return JSON.parse(localStorage.getItem(this.tokenKey));
     }
@@ -38,15 +43,9 @@ export class AuthenticationService {
         return JSON.parse(localStorage.getItem(this.tokenKey))['access_token'];
     }
 
-    isAuthenticated() {
-        let token = localStorage.getItem(this.tokenKey);
-
-        if (token) {
-            return true;
-        }
-        else {
-            return false;
-        }
+    isAuthenticated(): boolean {
+        const token = localStorage.getItem(this.tokenKey);
+        return !!token;
     }
 
     refreshToken() {
